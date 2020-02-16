@@ -1,0 +1,45 @@
+Arguments: 
+  /usr/local/Cellar/node/13.7.0/bin/node /usr/local/Cellar/yarn/1.22.0/libexec/bin/yarn.js add appolo-server mongoose graphql
+
+PATH: 
+  /Users/hrdyjan1/.rvm/gems/ruby-2.6.5/bin:/Users/hrdyjan1/.rvm/gems/ruby-2.6.5@global/bin:/Users/hrdyjan1/.rvm/rubies/ruby-2.6.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/hrdyjan1/.rvm/gems/ruby-2.6.5/bin:/Users/hrdyjan1/.rvm/gems/ruby-2.6.5@global/bin:/Users/hrdyjan1/.rvm/rubies/ruby-2.6.5/bin:/Users/hrdyjan1/.rvm/bin:/Users/hrdyjan1/.rvm/bin
+
+Yarn version: 
+  1.22.0
+
+Node version: 
+  13.7.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/appolo-server: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.0/libexec/lib/cli.js:66975:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.22.0/libexec/lib/cli.js:140727:22)
+      at Request.emit (events.js:321:20)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.0/libexec/lib/cli.js:141699:10)
+      at Request.emit (events.js:321:20)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.0/libexec/lib/cli.js:141621:12)
+      at Object.onceWrapper (events.js:427:28)
+      at IncomingMessage.emit (events.js:333:22)
+      at endReadableNT (_stream_readable.js:1201:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "open-minded",
+    "version": "1.0.0",
+    "description": "Free web tool aimed on anonymous asks and personal answers. ",
+    "main": "index.js",
+    "repository": "https://github.com/hrdyjan1/open-minded.git",
+    "author": "Jan Hrdý <hrdyjan1@gmail.com>",
+    "license": "MIT",
+    "private": false
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
