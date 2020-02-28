@@ -8,10 +8,10 @@ import { typeDefs, resolvers, context } from './graphql';
 
 const app = express();
 
-app.use(express.static('static'));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'static', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 const server = new ApolloServer({
@@ -26,7 +26,6 @@ connect(process.env.mongodb, { useNewUrlParser: true, useUnifiedTopology: true }
   .then(() => console.log('MongoDB connected'))
   .catch((error) => console.log(error));
 
-
 server.applyMiddleware({ app, path: '/graphql' });
 
-app.listen({ port: process.env.PORT || 5000 }, () => console.log(`Apollo Server is listening on ${server.graphqlPath}`));
+app.listen({ port: process.env.PORT || 5001 }, () => console.log(`Apollo Server is listening on ${server.graphqlPath}`));
