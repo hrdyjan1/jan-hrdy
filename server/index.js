@@ -14,6 +14,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
+
 const server = new ApolloServer({
   introspection: true,
   typeDefs,

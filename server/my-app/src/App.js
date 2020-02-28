@@ -72,6 +72,8 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/will-match" component={WillMatch}/>
+                <Route path="*" component={NoMatch} />
+                <Route path="/*/*" component={NoMatch} />
                 <Route component={NoMatch} />
             </Switch>
             </div>
