@@ -19,7 +19,7 @@ const GET_MINDS_QUERY = gql`
 `
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:5000/graphql'
+    uri: '/graphql'
 })
 
 const client = new ApolloClient({
@@ -38,9 +38,10 @@ export const WillMatch = () => {
         <div>
             <Query query={GET_MINDS_QUERY}>
                 {({loading, error, data}) => {
+                    console.log('data------')
                     console.log('data', data)
                     return (
-                        <p>You lou</p>
+                        <p>You Lou man</p>
                     )}}
             </Query>
             <p>WillMatch</p>
