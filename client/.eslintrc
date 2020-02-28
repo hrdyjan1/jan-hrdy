@@ -1,0 +1,36 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      // specify which additional language features to use
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "plugins": ["react", "react-native"], // add eslint-plugin-react-native as a plugin for ESLint
+  "extends": ["airbnb", "eslint:recommended", "plugin:react/recommended", "airbnb/hooks"], // extend airbnb's JavaScript style guide: https://github.com/airbnb/javascript
+  "rules": {
+    "comma-dangle": 0
+  },
+  //   "presets": ["es2015","es2017"],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.4.2"
+    }
+  }
+  //   "parser": "babel-eslint", // allows us to parse the code with babel so that jsx code won't be considered an error
+  //   "env": {
+  //     "jest": true,
+  //     "react-native/react-native": true // whitelist all browser-like globals
+  //   },
+  //   "globals": {
+  //     "fetch": false
+  //   }
+}
