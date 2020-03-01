@@ -1,10 +1,15 @@
 import { gql } from 'apollo-server';
 
 export default gql`
+  enum Role {
+    ADMIN
+    USER
+  }
   type User {
     id: String
     email: String
     token: String
+    role: Role  
     username: String
     createdAt: String
   }

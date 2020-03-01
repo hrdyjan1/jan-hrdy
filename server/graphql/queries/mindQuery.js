@@ -13,7 +13,6 @@ export const newMindSubscribe = {
   subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(subscriptionType.NEW_MIND),
 };
 
-
 export const createMind = async (_, args, context) => {
   const { createdMind } = args;
   const { head, body } = createdMind;

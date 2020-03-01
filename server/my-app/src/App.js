@@ -3,12 +3,14 @@ import ApolloClient from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'semantic-ui-css/semantic.min.css';
 import './styles/App.css';
-import { LoginView, OpenMindedView, RegisterView } from './components/views';
+import { LoginView, OpenMindedView, RegisterView, NewArticleView } from './components/views';
 import { AuthProvider } from './contexts';
+import { Menu } from './components/common';
+import { AuthRoute } from './components/routes';
 
 const httpLink = createHttpLink({
   uri: '/graphql'
@@ -33,35 +35,13 @@ function App() {
       <AuthProvider>
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/register'>Register</Link>
-              </li>
-              <li>
-                <Link to='/open-minded'>Open Minded</Link>
-              </li>
-              <li>
-                <Link to='/will-not-match'>Will Not Match</Link>
-              </li>
-              <li>
-                <Link to='/login'>Will Not Match</Link>
-              </li>
-              <li>
-                <Link to='/also/will/not/match'>Also Will Not Match</Link>
-              </li>
-            </ul>
-
+            <Menu />
             <Switch>
               <Route path='/' exact component={Home} />
               <Route path='/open-minded' component={OpenMindedView} />
-              <Route path='/login' component={LoginView} />
-              <Route path='/register' component={RegisterView} />
+              <Route path='/articles' component={NewArticleView} />
+              <AuthRoute path='/login' component={LoginView} />
+              <AuthRoute path='/register' component={RegisterView} />
               <Route component={NoMatch} />
             </Switch>
           </div>

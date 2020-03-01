@@ -5,8 +5,6 @@ import { User } from '../../models';
 import { getToken, checkUserExistence } from '../../utils/helper';
 import { validateRegistration, validateLogin } from '../../utils/validators';
 
-const getUsers = () => {};
-
 const login = async (_, args) => {
   const { loginUser } = args;
   const { username, password } = loginUser;
@@ -14,10 +12,7 @@ const login = async (_, args) => {
   validateLogin(username, password);
 
   const user = await User.findOne({ username });
-  const passwordMatch = await bcrypt.compare(
-    password,
-    user ? user.password : '',
-  );
+  const passwordMatch = await bcrypt.compare(password, user ? user.password : '');
 
   if (!passwordMatch || !user) {
     throw new UserInputError('Incorrect credentials.', {
@@ -25,10 +20,17 @@ const login = async (_, args) => {
     });
   }
 
-  const token = getToken({ id: user.id, email: user.email });
+  const token = getToken({
+    id: user.id,
+    role: user.role,
+    email: user.email,
+    username: user.username,
+    createdAt: user.createdAt,
+  });
 
   return {
     id: user.id,
+    role: user.role,
     email: user.email,
     username: user.username,
     createdAt: user.createdAt,
@@ -43,7 +45,7 @@ const register = async (_, args) => {
   } = registerUser;
 
   validateRegistration(username, password, confirmPassword, email);
-  await checkUserExistence({ email });
+  await checkUserExistence({ username, email });
 
   const id = uniqid('id-');
   const token = getToken({ id, email });
@@ -64,8 +66,9 @@ const register = async (_, args) => {
     email: user.email,
     username: user.username,
     createdAt: user.createdAt,
+    role: user.role,
     token,
   };
 };
 
-export { login, register, getUsers };
+export { login, register };
