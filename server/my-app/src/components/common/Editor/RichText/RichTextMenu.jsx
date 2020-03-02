@@ -6,9 +6,11 @@ import FormatItalic from '@material-ui/icons/FormatItalic';
 import FormatTitle from '@material-ui/icons/FormatSize';
 import FormatUnderlined from '@material-ui/icons/FormatUnderlined';
 import FormatColor from '@material-ui/icons/Palette';
+import Image from '@material-ui/icons/Image';
 import IconButton from '@material-ui/core/IconButton';
 
 import { NavBar, NavDivider, ColorsContainer, Palette, ColorDrop, palletOfColors } from './styles';
+import { NavInputButton } from './components';
 
 function NavButton({ children, onClick }) {
   const onMouseDown = e => {
@@ -22,8 +24,7 @@ function NavButton({ children, onClick }) {
   );
 }
 
-
-const RichTextMenu = React.memo(({setStyle}) => {
+const RichTextMenu = React.memo(({ setStyle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const isColoPalletOpen = Boolean(anchorEl);
@@ -34,13 +35,17 @@ const RichTextMenu = React.memo(({setStyle}) => {
   const onItalicClick = () => setStyle('ITALIC');
   const onUnderlineClick = () => setStyle('UNDERLINE');
 
-  const onColorClick = color => {
-    setStyle(color.toUpperCase());
-    setAnchorEl(null);
+  const onColorClick = event => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleShowingColor = event => {
-    setAnchorEl(event.currentTarget);
+  const onImageSelect = () => {
+    console.log('image clicked');
+  };
+
+  const onColorSelect = color => {
+    setStyle(color.toUpperCase());
+    setAnchorEl(null);
   };
 
   const closePalletColor = () => {
@@ -52,6 +57,7 @@ const RichTextMenu = React.memo(({setStyle}) => {
       <NavButton onClick={onTitleClick}>
         <FormatTitle />
       </NavButton>
+
       <NavDivider />
       <NavButton onClick={onBoldClick}>
         <FormatBold />
@@ -62,9 +68,39 @@ const RichTextMenu = React.memo(({setStyle}) => {
       <NavButton onClick={onUnderlineClick}>
         <FormatUnderlined />
       </NavButton>
+
       <NavDivider />
-      <NavButton aria-describedby={id} onClick={handleShowingColor}>
+      <NavButton aria-describedby={id} onClick={onColorClick}>
         <FormatColor />
+      </NavButton>
+
+      <NavInputButton onClick={onImageSelect}>
+        <Image />
+      </NavInputButton>
+      {/* <div>
+        <input
+          onChange={onImageClick}
+          accept='image/*'
+          style={{ display: 'none' }}
+          id='upload-photo'
+          name='upload-photo'
+          type='file'
+        />
+        <label htmlFor='upload-photo' style={{ cursor: 'inherit', lineHeight: 0 }}>
+          <IconButton variant='raised' component='span'>
+            <Image />
+          </IconButton>
+        </label>
+      </div> */}
+
+      {/* <NavButton>
+        <InputContainer handleClick={onImageClick}>
+          <Image />
+        </InputContainer>
+      </NavButton> */}
+
+      <NavButton>
+        <Image />
       </NavButton>
 
       <Popper id={id} open={isColoPalletOpen} anchorEl={anchorEl} onClose={closePalletColor}>
@@ -79,7 +115,7 @@ const RichTextMenu = React.memo(({setStyle}) => {
                     e.preventDefault();
                   }}
                   onClick={e => {
-                    onColorClick(color);
+                    onColorSelect(color);
                   }}
                   color={color}
                 />
@@ -90,6 +126,6 @@ const RichTextMenu = React.memo(({setStyle}) => {
       </Popper>
     </NavBar>
   );
-})
+});
 
 export default RichTextMenu;
