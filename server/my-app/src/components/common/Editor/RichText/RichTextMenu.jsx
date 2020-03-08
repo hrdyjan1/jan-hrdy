@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import { NavBar, NavDivider, ColorsContainer, Palette, ColorDrop, palletOfColors } from './styles';
 import { NavInputButton } from './components';
+import { get } from '../../../../helpers';
 
 function NavButton({ children, onClick }) {
   const onMouseDown = e => {
@@ -24,7 +25,18 @@ function NavButton({ children, onClick }) {
   );
 }
 
-const RichTextMenu = React.memo(({ setStyle }) => {
+function handleFile(file, callback = console.log, fileType = 'image') {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function() {
+    callback(fileType, reader.result);
+  };
+  reader.onerror = function(error) {
+    throw new Error('Can not convert image to base64');
+  };
+}
+
+const RichTextMenu = React.memo(({ insertMedium, setStyle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const isColoPalletOpen = Boolean(anchorEl);
@@ -39,8 +51,14 @@ const RichTextMenu = React.memo(({ setStyle }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const onImageSelect = () => {
-    console.log('image clicked');
+  const onImageSelect = event => {
+    const file = get(event, 'target.files[0]');
+
+    if (!file) {
+      return null;
+    }
+
+    handleFile(file, insertMedium);
   };
 
   const onColorSelect = color => {
@@ -98,10 +116,6 @@ const RichTextMenu = React.memo(({ setStyle }) => {
           <Image />
         </InputContainer>
       </NavButton> */}
-
-      <NavButton>
-        <Image />
-      </NavButton>
 
       <Popper id={id} open={isColoPalletOpen} anchorEl={anchorEl} onClose={closePalletColor}>
         <ClickAwayListener onClickAway={closePalletColor}>

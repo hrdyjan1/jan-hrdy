@@ -1,29 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
+// import createImagePlugin from 'draft-js-image-plugin';
 
 import { RTEContainer, customStyleMap } from './styles';
 import RichTextMenu from './RichTextMenu';
 
 const emptyState = EditorState.createEmpty();
-
-function useTraceUpdate(props) {
-  const prev = useRef(props);
-  useEffect(() => {
-    const changedProps = Object.entries(props).reduce((ps, [k, v]) => {
-      if (prev.current[k] !== v) {
-        ps[k] = [prev.current[k], v];
-      }
-      return ps;
-    }, {});
-    if (Object.keys(changedProps).length > 0) {
-      console.log('Changed props:', changedProps);
-    }
-    prev.current = props;
-  });
-}
+// const imagePlugin = createImagePlugin();
+// const plugins = [imagePlugin];
 
 export default function RichTextEditor({ changeContent, shouldClear }) {
-  useTraceUpdate({ changeContent, shouldClear });
   const rte = useRef(null);
   const [editorState, setEditorState] = useState(emptyState);
 
@@ -46,9 +32,24 @@ export default function RichTextEditor({ changeContent, shouldClear }) {
     onChange
   ]);
 
+  const insertMedium = useCallback(
+    (mediumType, medium) => {
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(mediumType, 'IMMUTABLE', {
+        src: medium
+      });
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+      const newEditorState = EditorState.set(editorState, {
+        currentContent: contentStateWithEntity
+      });
+      setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+    },
+    [editorState]
+  );
+
   return (
     <>
-      <RichTextMenu setStyle={setStyle} />
+      <RichTextMenu setStyle={setStyle} insertMedium={insertMedium} editorState={editorState} />
       <RTEContainer
         onClick={e => {
           e.preventDefault();

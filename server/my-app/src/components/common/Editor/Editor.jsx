@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { stateToHTML } from 'draft-js-export-html';
+
 import { RichTextEditor } from './RichText';
 
 const options = {
@@ -18,10 +19,17 @@ const Editor = () => {
   }, []);
 
   const saveContent = () => {
+    if (!content) {
+      return;
+    }
     const markup = stateToHTML(content, options);
-    console.log('markup', markup);
+    console.log('markup');
+    console.log(markup);
   };
 
+  const addImage = () => {
+    console.log('not yer');
+  };
   const clearContent = () => setShouldClear(true);
 
   return (
@@ -29,6 +37,9 @@ const Editor = () => {
       <RichTextEditor changeContent={changeContent} shouldClear={shouldClear} />
       <button type='button' onClick={clearContent}>
         Clear me
+      </button>
+      <button type='button' onClick={addImage}>
+        Add image
       </button>
       <button type='button' onClick={saveContent}>
         Save
