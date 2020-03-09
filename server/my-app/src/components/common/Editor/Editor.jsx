@@ -2,12 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { stateToHTML } from 'draft-js-export-html';
 
 import { RichTextEditor } from './RichText';
-
-const options = {
-  inlineStyles: {
-    TITLE: { style: { fontSize: '1.5em' } }
-  }
-};
+import { options } from './RichText/helpers';
 
 const Editor = () => {
   const [content, setContent] = useState();
