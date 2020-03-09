@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
-// import createImagePlugin from 'draft-js-image-plugin';
+import { EditorState, RichUtils, AtomicBlockUtils } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
 
-import { RTEContainer, customStyleMap } from './styles';
 import RichTextMenu from './RichTextMenu';
-
-const emptyState = EditorState.createEmpty();
-// const imagePlugin = createImagePlugin();
-// const plugins = [imagePlugin];
+import { RTEContainer, customStyleMap } from './styles';
+import { emptyState, myBlockStyleFn, plugins } from './helpers';
 
 export default function RichTextEditor({ changeContent, shouldClear }) {
   const rte = useRef(null);
@@ -16,6 +13,8 @@ export default function RichTextEditor({ changeContent, shouldClear }) {
   const onChange = useCallback(
     editorState => {
       setEditorState(editorState);
+      const content = editorState.getCurrentContent();
+      console.log(content.getBlockMap());
       changeContent(editorState.getCurrentContent());
     },
     [changeContent]
@@ -36,15 +35,15 @@ export default function RichTextEditor({ changeContent, shouldClear }) {
     (mediumType, medium) => {
       const contentState = editorState.getCurrentContent();
       const contentStateWithEntity = contentState.createEntity(mediumType, 'IMMUTABLE', {
-        src: medium
+        src: medium,
       });
       const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
       const newEditorState = EditorState.set(editorState, {
         currentContent: contentStateWithEntity
       });
-      setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
+      onChange(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
     },
-    [editorState]
+    [editorState, onChange]
   );
 
   return (
@@ -57,7 +56,11 @@ export default function RichTextEditor({ changeContent, shouldClear }) {
           rte.current.editor.focus();
         }}
       >
-        <Editor ref={rte} {...{ editorState, onChange, customStyleMap }} />
+        <Editor
+          ref={rte}
+          blockStyleFn={myBlockStyleFn}
+          {...{ plugins, editorState, onChange, customStyleMap }}
+        />
       </RTEContainer>
     </>
   );

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'semantic-ui-css/semantic.min.css';
 import './styles/App.css';
+import './styles/Editor.css';
 import { LoginView, OpenMindedView, RegisterView, NewArticleView } from './components/views';
 import { AuthProvider } from './contexts';
 import { Menu } from './components/common';

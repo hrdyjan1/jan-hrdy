@@ -57,7 +57,7 @@ const RichTextMenu = React.memo(({ insertMedium, setStyle }) => {
     if (!file) {
       return null;
     }
-
+    
     handleFile(file, insertMedium);
   };
 
