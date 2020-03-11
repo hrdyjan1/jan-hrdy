@@ -6,7 +6,6 @@ export default {
   Query: {
     getMind,
     getMinds,
-
   },
   Mutation: {
     createMind,

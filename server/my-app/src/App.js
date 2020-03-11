@@ -1,7 +1,7 @@
 import React from 'react';
 import ApolloClient from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { createHttpLink } from 'apollo-link-http';
+import { createUploadLink } from 'apollo-upload-client'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -12,13 +12,14 @@ import { LoginView, OpenMindedView, RegisterView, NewArticleView } from './compo
 import { AuthProvider } from './contexts';
 import { Menu } from './components/common';
 import { AuthRoute } from './components/routes';
+import HomeView from './components/views/HomeView';
 
-const httpLink = createHttpLink({
+const uploadLink = createUploadLink({
   uri: '/graphql'
 });
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: uploadLink,
   cache: new InMemoryCache()
 });
 
@@ -38,7 +39,7 @@ function App() {
           <div>
             <Menu />
             <Switch>
-              <Route path='/' exact component={Home} />
+              <Route path='/' exact component={HomeView} />
               <Route path='/open-minded' component={OpenMindedView} />
               <Route path='/articles' component={NewArticleView} />
               <AuthRoute path='/login' component={LoginView} />

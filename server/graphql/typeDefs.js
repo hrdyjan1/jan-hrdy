@@ -5,11 +5,25 @@ export default gql`
     ADMIN
     USER
   }
+  #   type Logo {
+  #     path: String!
+  #     filename: String!
+  #   }
+  
+  type Article {
+    id: String!
+    # filename: String!
+    # path: String!
+    header: String!
+    subHeader: String!
+    hashtags: [String]!
+    createdAt: String
+  }
   type User {
     id: String
     email: String
     token: String
-    role: Role  
+    role: Role
     username: String
     createdAt: String
   }
@@ -35,7 +49,10 @@ export default gql`
     createdAt: String!
     userId: String!
   }
-
+  type Status {
+      success: String
+  }
+  # INPUTS
   input RegisterUser {
     username: String
     password: String
@@ -58,10 +75,17 @@ export default gql`
     mindId: String
     commentId: String
   }
-
+  #   input CreatedArticle {
+  #     # logo: Upload!
+  #     header: String!
+  #     subHeader: String!
+  #     hashtags: [String]!
+  #   }
+  # QUERY
   type Query {
     getMinds: [Mind]
     getMind(mindId: String): Mind
+    getArticles: [Article]
   }
   type Mutation {
     login(loginUser: LoginUser): User
@@ -71,6 +95,8 @@ export default gql`
     createComment(createdComment: CreatedComment): Mind
     deleteComment(deletedComment: DeletedComment): Mind
     likeMind(mindId: String): Mind
+    createArticle(header: String!, subHeader: String!, logo: Upload!, hashtags: [String]!): Article
+    uploadFile(file: Upload!): Status
   }
   type Subscription {
     newMindSubscribe: Mind
