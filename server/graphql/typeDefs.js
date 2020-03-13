@@ -96,7 +96,7 @@ export default gql`
     deleteComment(deletedComment: DeletedComment): Mind
     likeMind(mindId: String): Mind
     createArticle(header: String!, subHeader: String!, logo: Upload!, hashtags: [String]!): Article
-    uploadFile(file: Upload!): Status
+    uploadFile(body: String!, logo: Upload!, hashtags: [String]!, header: String!, subHeader: String!): Status
   }
   type Subscription {
     newMindSubscribe: Mind

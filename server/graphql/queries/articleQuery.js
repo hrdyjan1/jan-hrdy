@@ -48,7 +48,13 @@ export const createArticle = async (_, args) => {
 
 export const getArticles = async (_, args) => {};
 export const uploadFile = async (_, args) => {
-  const { file } = await args;
-  console.log('file', file);
+  const {
+    body, logo, hashtags, header, subHeader,
+  } = await args;
+  console.log('body', body);
+  console.log('logo', logo);
+  console.log('hashtags', hashtags);
+  console.log('header', header);
+  console.log('subHeader', subHeader);
   return { success: 'Done' };
 };
