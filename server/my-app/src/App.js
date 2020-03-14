@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './styles/App.css';
 import './styles/Editor.css';
-import { LoginView, OpenMindedView, RegisterView, NewArticleView } from './components/views';
+import { LoginView, OpenMindedView, RegisterView, NewArticleView, CreateArticleView } from './components/views';
 import { AuthProvider } from './contexts';
 import { Menu } from './components/common';
 import { AuthRoute } from './components/routes';
@@ -40,6 +40,7 @@ function App() {
             <Menu />
             <Switch>
               <Route path='/' exact component={HomeView} />
+              <Route path='/create-article' exact component={CreateArticleView} />
               <Route path='/open-minded' component={OpenMindedView} />
               <Route path='/articles' component={NewArticleView} />
               <AuthRoute path='/login' component={LoginView} />

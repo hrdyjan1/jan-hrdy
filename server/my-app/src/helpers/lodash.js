@@ -6,3 +6,12 @@ export const get = (object, path, value) => {
   // Find value if exist return otherwise return undefined value;
   return pathArray.reduce((prevObj, key) => prevObj && prevObj[key], object) || value;
 };
+
+export const isEmpty = value => {
+    return (
+      value == null || 
+      (typeof value === 'object' && Object.keys(value).length === 0) ||
+      (typeof value === 'string' && value.trim().length === 0)
+    )
+  }
+  

@@ -37,6 +37,9 @@ const Menu = () => {
         <Link to='/open-minded'>Open Minded</Link>
       </li>
       <li>
+        <Link to='/create-article'>Create Article</Link>
+      </li>
+      <li>
         <Link to='/will-not-match'>Will Not Match</Link>
       </li>
       <li>

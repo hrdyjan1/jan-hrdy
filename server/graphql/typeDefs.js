@@ -5,11 +5,6 @@ export default gql`
     ADMIN
     USER
   }
-  #   type Logo {
-  #     path: String!
-  #     filename: String!
-  #   }
-  
   type Article {
     id: String!
     # filename: String!
@@ -75,12 +70,6 @@ export default gql`
     mindId: String
     commentId: String
   }
-  #   input CreatedArticle {
-  #     # logo: Upload!
-  #     header: String!
-  #     subHeader: String!
-  #     hashtags: [String]!
-  #   }
   # QUERY
   type Query {
     getMinds: [Mind]
