@@ -8,21 +8,24 @@ const formValues = {
     label: 'Header',
     type: 'text',
     name: header,
-    description: 'First header'
+    description: 'First header',
+    icon: { name: 'heading' }
   },
   subHeader: {
     id: subHeader,
     label: 'SubHeader',
     type: 'text',
     name: subHeader,
-    description: 'Second header'
+    description: 'Second header',
+    icon: { name: 'heading', size: 'small' }
   },
   logo: {
     id: logo,
     label: 'Logo',
     type: 'file',
     name: logo,
-    description: 'Logo'
+    description: 'Search',
+    icon: { name: 'search' }
   }
 };
 
