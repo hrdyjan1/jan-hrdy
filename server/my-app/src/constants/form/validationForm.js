@@ -22,3 +22,11 @@ export const logoValidation = yup
     'Unsupported Format',
     value => value && SUPPORTED_FORMATS.includes(value.type)
   );
+
+export const hashtagsValidation = yup.array().of(
+  yup.object().shape({
+    name: yup.string()
+      .required('Name is required')
+      .min(2, 'Must be 2 characters at minimum.')
+  })
+);

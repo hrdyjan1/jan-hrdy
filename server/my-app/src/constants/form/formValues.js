@@ -1,6 +1,7 @@
 const logo = 'logo';
 const header = 'header';
 const subHeader = 'subHeader';
+const hashtags = 'hashtags';
 
 const formValues = {
   header: {
@@ -26,11 +27,20 @@ const formValues = {
     name: logo,
     description: 'Search',
     icon: { name: 'search' }
+  },
+  hashtags: {
+      id: hashtags,
+      label: 'Hashtags',
+      type: 'text',
+      name: hashtags,
+      description: 'Type some tags...',
+      icon: {name: 'hashtag', content: 'Add Hashtag'}
   }
 };
 
 export const formValuesCreateArticle = {
   logo: formValues.logo,
   header: formValues.header,
-  subHeader: formValues.subHeader
+  subHeader: formValues.subHeader,
+  hashtags: formValues.hashtags
 };

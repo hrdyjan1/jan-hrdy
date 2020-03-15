@@ -1,12 +1,14 @@
 export const initialValues = {
     header: '',
     subHeader: '',
-    logo: null
+    logo: null,
+    hashtags: null,
 };
 
 
 export const initialValueCreateArticle = {
     header: initialValues.header,
     subHeader: initialValues.subHeader,
-    logo: initialValues.logo
+    logo: initialValues.logo,
+    hashtags: initialValues.hashtags
 }

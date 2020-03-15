@@ -3,10 +3,10 @@ import { Formik } from 'formik';
 import { createArticleForm } from '../../../constants';
 import { isEmpty } from '../../../helpers';
 import { Form, Button } from 'semantic-ui-react';
-import { TextField, FileField } from '../../common/Form';
+import { TextField, FileField, ItemsField } from '../../common/Form';
 
 const { formValues, initialValues, validateSchema } = createArticleForm;
-const { logo, header, subHeader } = formValues;
+const { logo, header, subHeader, hashtags } = formValues;
 
 export const DisplayFormikState = props => (
   <div style={{ margin: '1rem 0' }}>
@@ -29,18 +29,17 @@ const CreateArticleView = () => {
     alert(JSON.stringify(values, null, 2));
   };
 
-  
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validateSchema}>
       {props => {
-        const { values, errors, dirty, isSubmitting, handleSubmit, setFieldValue } = props;
+        const { errors, dirty, isSubmitting, handleSubmit } = props;
         return (
           <Form onSubmit={handleSubmit}>
             <TextField info={header} />
             <TextField info={subHeader} />
             <FileField info={logo} />
+            <ItemsField info={hashtags} />
 
-        
             <Button type='submit' disabled={!(dirty && isEmpty(errors)) || isSubmitting}>
               Submit
             </Button>
