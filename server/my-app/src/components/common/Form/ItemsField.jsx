@@ -1,41 +1,13 @@
-import React, { useState } from 'react';
-import { Field, FieldArray } from 'formik';
+import React from 'react';
+import { FieldArray, useField } from 'formik';
+import ItemField from './components/ItemField';
 
 const ItemsField = ({ info }) => {
-  const [index, setIndex] = useState(0);
-
+  const [, meta] = useField(info.name);
   return (
     <FieldArray
       name={info.name}
-      render={({ push, insert, remove }) => {
-        return (
-          <>
-            <Field name={`${info.name}[${index}].name`}>
-              {({
-                field, // { name, value, onChange, onBlur }
-                form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-                meta
-              }) => {
-                const { name } = field;
-                const more = () => {
-                  push({ name: '' });
-                  setIndex(i => i + 1);
-                };
-                return (
-                  <div>
-                    <label htmlFor={name}>Email Address</label>
-                    <input id={name} type='text' placeholder='Email' {...field} />
-                    {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
-                    <button type='button' onClick={more}>
-                      +
-                    </button>
-                  </div>
-                );
-              }}
-            </Field>
-          </>
-        );
-      }}
+      render={helpers => <ItemField shouldShowError={meta.touched} info={info} {...helpers} />}
     />
   );
 };

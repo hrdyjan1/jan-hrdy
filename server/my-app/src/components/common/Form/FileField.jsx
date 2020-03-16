@@ -4,9 +4,10 @@ import { Form, Button, Icon } from 'semantic-ui-react';
 
 import { FileLabel } from './components';
 
-const FileField = ({ info: { id, name, type, label, description, icon } }) => {
+const FileField = ({ info }) => {
+  const { id, name, type, label, description, icon } = info;
   const fileRef = createRef();
-  const [_, meta, helpers] = useField(name);
+  const [, meta, helpers] = useField(name);
   const { error, touched, value } = meta;
   const { setTouched, setValue } = helpers;
 
